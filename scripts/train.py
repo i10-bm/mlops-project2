@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
-# Load dataset directly from sklearn (no network fetching issues)
+# Load dataset directly from sklearn
 data = load_breast_cancer(as_frame=True)
 X = data.data
 y = data.target
