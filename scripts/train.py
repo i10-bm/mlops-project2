@@ -1,12 +1,12 @@
 import mlflow
 import mlflow.sklearn
-from sklearn.datasets import fetch_openml
+from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
-# Fetch dataset reliably via data_id
-data = fetch_openml(data_id=560, as_frame=True)
+# Load dataset directly from sklearn (no network fetching issues)
+data = load_breast_cancer(as_frame=True)
 X = data.data
 y = data.target
 
