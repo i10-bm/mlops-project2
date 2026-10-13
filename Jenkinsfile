@@ -1,20 +1,20 @@
-@Library('jenkins-shared-library') _
+@Library('jenkins-shared-library@main') _
 
 pipeline {
     agent any
-    environment {
-        MLFLOW_TRACKING_URI = 'http://127.0.0.1:5000'
-    }
+
     stages {
         stage('Route Branch Pipeline') {
             steps {
                 script {
-                    if (TAG_NAME =~ /^v\d+\.\d+/) {
+                    if (env.TAG_NAME) {
                         prodPipeline()
-                    } else if (BRANCH_NAME == 'main') {
+                    } else if (env.BRANCH_NAME == 'main') {
                         preProdPipeline()
-                    } else if (BRANCH_NAME == 'dev') {
+                    } else if (env.BRANCH_NAME == 'dev') {
                         devPipeline()
+                    } else {
+                        echo "Unknown branch or tag: ${env.BRANCH_NAME}"
                     }
                 }
             }
